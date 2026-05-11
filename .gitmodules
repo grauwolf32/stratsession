@@ -1,0 +1,96 @@
+[submodule "sources/appsec/trivy"]
+	path = sources/appsec/trivy
+	url = https://github.com/aquasecurity/trivy.git
+[submodule "sources/appsec/trivy-mcp"]
+	path = sources/appsec/trivy-mcp
+	url = https://github.com/aquasecurity/trivy-mcp.git
+[submodule "sources/appsec/defectdojo"]
+	path = sources/appsec/defectdojo
+	url = https://github.com/DefectDojo/django-DefectDojo.git
+[submodule "sources/appsec/sunshine"]
+	path = sources/appsec/sunshine
+	url = https://github.com/CycloneDX/Sunshine.git
+[submodule "sources/appsec/nettacker"]
+	path = sources/appsec/nettacker
+	url = https://github.com/OWASP/Nettacker.git
+[submodule "sources/appsec/coraza"]
+	path = sources/appsec/coraza
+	url = https://github.com/corazawaf/coraza.git
+[submodule "sources/appsec/coreruleset"]
+	path = sources/appsec/coreruleset
+	url = https://github.com/coreruleset/coreruleset.git
+[submodule "sources/appsec/patchleaks"]
+	path = sources/appsec/patchleaks
+	url = https://github.com/hatlesswizard/patchleaks.git
+[submodule "sources/appsec/aflplusplus"]
+	path = sources/appsec/aflplusplus
+	url = https://github.com/AFLplusplus/AFLplusplus.git
+[submodule "sources/appsec/libafl"]
+	path = sources/appsec/libafl
+	url = https://github.com/AFLplusplus/LibAFL.git
+[submodule "sources/appsec/ruzzy"]
+	path = sources/appsec/ruzzy
+	url = https://github.com/trailofbits/ruzzy.git
+[submodule "sources/appsec/vespasian"]
+	path = sources/appsec/vespasian
+	url = https://github.com/praetorian-inc/vespasian.git
+[submodule "sources/appsec/hadrian"]
+	path = sources/appsec/hadrian
+	url = https://github.com/praetorian-inc/hadrian.git
+[submodule "sources/appsec/electron-safe-updater"]
+	path = sources/appsec/electron-safe-updater
+	url = https://github.com/doyensec/ElectronSafeUpdater.git
+[submodule "sources/appsec/dvbe"]
+	path = sources/appsec/dvbe
+	url = https://github.com/infosecak/dvbe.git
+[submodule "sources/appsec/buttercup"]
+	path = sources/appsec/buttercup
+	url = https://github.com/trailofbits/buttercup.git
+[submodule "sources/appsec/seclab-taskflow-agent"]
+	path = sources/appsec/seclab-taskflow-agent
+	url = https://github.com/GitHubSecurityLab/seclab-taskflow-agent.git
+[submodule "sources/perimeter/nuclei"]
+	path = sources/perimeter/nuclei
+	url = https://github.com/projectdiscovery/nuclei.git
+[submodule "sources/perimeter/nuclei-templates"]
+	path = sources/perimeter/nuclei-templates
+	url = https://github.com/projectdiscovery/nuclei-templates.git
+[submodule "sources/perimeter/katana"]
+	path = sources/perimeter/katana
+	url = https://github.com/projectdiscovery/katana.git
+[submodule "sources/perimeter/httpx"]
+	path = sources/perimeter/httpx
+	url = https://github.com/projectdiscovery/httpx.git
+[submodule "sources/perimeter/subfinder"]
+	path = sources/perimeter/subfinder
+	url = https://github.com/projectdiscovery/subfinder.git
+[submodule "sources/perimeter/naabu"]
+	path = sources/perimeter/naabu
+	url = https://github.com/projectdiscovery/naabu.git
+[submodule "sources/perimeter/caido"]
+	path = sources/perimeter/caido
+	url = https://github.com/caido/caido.git
+[submodule "sources/perimeter/uncover"]
+	path = sources/perimeter/uncover
+	url = https://github.com/projectdiscovery/uncover.git
+[submodule "sources/perimeter/nuclei-ai-extension"]
+	path = sources/perimeter/nuclei-ai-extension
+	url = https://github.com/projectdiscovery/nuclei-ai-extension.git
+[submodule "sources/perimeter/nuclei-templates-ai"]
+	path = sources/perimeter/nuclei-templates-ai
+	url = https://github.com/projectdiscovery/nuclei-templates-ai.git
+[submodule "sources/perimeter/akto"]
+	path = sources/perimeter/akto
+	url = https://github.com/akto-api-security/akto.git
+[submodule "sources/perimeter/schemathesis"]
+	path = sources/perimeter/schemathesis
+	url = https://github.com/schemathesis/schemathesis.git
+[submodule "sources/perimeter/restler-fuzzer"]
+	path = sources/perimeter/restler-fuzzer
+	url = https://github.com/microsoft/restler-fuzzer.git
+[submodule "sources/perimeter/cherrybomb"]
+	path = sources/perimeter/cherrybomb
+	url = https://github.com/blst-security/cherrybomb.git
+[submodule "sources/perimeter/crapi"]
+	path = sources/perimeter/crapi
+	url = https://github.com/OWASP/crAPI.git
