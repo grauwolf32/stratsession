@@ -286,6 +286,27 @@ The conferences calendar matters less in 2027 than the **integration stories tol
 
 ---
 
+## 11. Per-category zoom — where the deep-dive charts live
+
+The aggregate charts above ride on top of **per-category capability matrices** embedded in the relevant deep-dive reports. Quick index:
+
+| Category | Chart | Lives in |
+|---|---|---|
+| CI/CD security | Capability matrix: poutine / zizmor / Gato-X / Plumber / SmokedMeat × 12 attack classes | [`ci-cd-security.md`](./ci-cd-security.md) |
+| Cloud posture | Numerical comparison: cloud-audit vs Prowler vs CloudFox vs Pacu vs ScoutSuite | [`cloud-posture.md`](./cloud-posture.md) |
+| AI vuln research | Capability matrix: 6 OSS CRSs/agents × 10 capability dimensions | [`ai-vuln-research.md`](./ai-vuln-research.md) |
+| Scanners | Feature coverage: Trivy / OSV-Scanner / Syft+Grype / Semgrep / Nuclei / Bandit × 13 features | [`scanners.md`](./scanners.md) |
+| API security | Workflow stage coverage by tool (discovery → spec → fuzzing → authZ) | [`api-security.md`](./api-security.md) |
+| DFIR / forensics | Platform × data-source coverage (Linux/Win/Mac × memory/disk/firmware/live) | [`firmware-memory-forensics.md`](./firmware-memory-forensics.md) |
+| Secret scanning | Feature matrix: Gitleaks / TruffleHog / Betterleaks / ggshield × 9 features | [`secret-scanning.md`](./secret-scanning.md) |
+| C2 / red-team | Transport + evasion + language comparison (4-panel) | [`c2-frameworks.md`](./c2-frameworks.md) |
+
+All charts are reproducible from [`assets/landscape/generate_per_category.py`](../assets/landscape/generate_per_category.py). The underlying data is hand-curated based on the project READMEs (verified May 2026) — when a tool ships a major release, update the matrix at the top of the corresponding function.
+
+The mental model: the **aggregate charts answer "what's happening in the field?"**, the **per-category charts answer "which tool do I pick within category X?"**. Use them together.
+
+---
+
 ## Methodology + caveats
 
 - **Inventory source:** [`TOOLS.md`](../TOOLS.md), cross-checked against the report files under [`reports/`](.) and the per-conference notes under [`conferences/`](../conferences/).

@@ -7,6 +7,23 @@ Vespasian and Hadrian are explicitly designed as a **pipeline**, not as alternat
 
 Together: `discover → spec → test → findings → triage`. Both repos are pure Go, both released early 2026, both Apache 2.0. The two `CLAUDE.md` files describe interlocking architectures that read like halves of one tool.
 
+## Where Vespasian + Hadrian sit in the wider 2026 API security workflow
+
+![API security — workflow stage coverage by tool](../assets/landscape/cat-api-workflow.png)
+
+The chart shows where each of the seven major OSS API security tools sits in the `discovery → spec → fuzzing → authZ` chain:
+
+- **Vespasian** owns discovery + spec generation (Praetorian's contribution to the upstream side).
+- **Hadrian** owns authZ testing; consumes spec partially (Praetorian's contribution to the downstream side).
+- **akto** is the only tool that spans the whole chain — discovery + partial spec audit + fuzzing + authZ. The trade-off: depth in each stage is less than the specialists.
+- **schemathesis + RESTler** are the fuzzing specialists. Schemathesis = property-based; RESTler = stateful chains. Use both for full fuzzing coverage.
+- **cherrybomb** is the spec-audit specialist (Rust CLI, designed for inspection rather than testing).
+- **Julius** is the AI-service-fingerprint specialist — orthogonal to the rest of the workflow but increasingly important for LLM-service inventory.
+
+For a 2026 API security stack: **Vespasian → cherrybomb → schemathesis + RESTler → Hadrian**, with **Julius** running alongside whenever LLM services are in scope. **akto** is the alternative single-tool approach for teams that can't operate a 5-tool stack.
+
+
+
 | | Vespasian | Hadrian |
 |---|---|---|
 | Stage | Discovery + spec generation | Authorization testing |

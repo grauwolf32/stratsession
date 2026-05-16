@@ -98,7 +98,15 @@ Install: `brew install betterleaks` / `dnf install betterleaks` / `docker pull g
 
 ---
 
-## How it compares to Gitleaks and TruffleHog
+## How it compares to Gitleaks, TruffleHog, ggshield
+
+![Secret scanners feature matrix](../assets/landscape/cat-secret-scanners.png)
+
+The matrix view of the comparison from later in this report: **Betterleaks owns the rule-writing column** (CEL filters + BPE naturalness + drop-in Gitleaks compat); **TruffleHog and ggshield own the detector-breadth column** (≥500 verifier types each). Gitleaks is the baseline everyone migrates from.
+
+Practical decision rule: **Betterleaks as your pre-commit / CI gate, TruffleHog (or ggshield) for periodic full-history sweeps of the credential types that actually need rotation**. Don't pick one tool; pick the layered combination.
+
+
 
 | Feature | Gitleaks | TruffleHog | **Betterleaks** |
 |---|---|---|---|

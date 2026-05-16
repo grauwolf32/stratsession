@@ -13,6 +13,18 @@ Four scanners but they operate at three different layers: **artifact scanning (T
 
 These are not competitors — they're a layered stack you'd deploy together. The interesting comparison is **the role each plays in a security program**.
 
+## Where each scanner sits in the broader OSS landscape
+
+![Scanners — OSS feature coverage matrix](../assets/landscape/cat-scanners-coverage.png)
+
+The matrix extends beyond the four submodule tools to the wider OSS scanner field. Three observations stand out:
+
+1. **Trivy and Syft+Grype are the broadest** — both check 8+ categories. Trivy's edge is K8s runtime + secrets + MCP server; Syft+Grype's edge is dual-format SBOM emission (CycloneDX and SPDX).
+2. **Semgrep is the only OSS scanner with reachability analysis and AI-detected logic flaws.** Both features are commercial-tier elsewhere; Semgrep ships them in the OSS tier. Pairs naturally with Trivy (which Semgrep does *not* do).
+3. **Specialist scanners win narrow columns.** Nuclei is the only one running templated CVE checks against live services; Bandit is the only deep-Python SAST. Neither tries to be a general-purpose scanner — and that's the right architectural choice.
+
+For a 2026 stack: **Trivy + Semgrep + Nuclei + (Syft+Grype if you care about SBOM distribution)** covers the matrix. OSV-Scanner is a Trivy alternative when remediation guidance matters more than secret/IaC coverage. Bandit fills the Python-deep slot if you ship Python-heavy services.
+
 ---
 
 ## Trivy — the SCA / SBOM / IaC / secret swiss army knife

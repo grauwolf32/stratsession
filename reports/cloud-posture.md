@@ -76,6 +76,20 @@ cloud-audit demo   # try without an AWS account
 
 ---
 
+## How it compares to other AWS-focused scanners
+
+![Cloud posture OSS scanner comparison](../assets/landscape/cat-cloud-compare.png)
+
+The chart makes the **complementarity story** measurable:
+
+- **AWS checks (breadth):** Prowler 6× cloud-audit. If your single requirement is "scan every AWS service," Prowler wins.
+- **Attack-chain rules (depth):** cloud-audit 2.6× Prowler. If your requirement is "rank findings by exploitability," cloud-audit wins.
+- **IAM escalation methods:** cloud-audit 61 vs Prowler 28 vs Pacu 35. cloud-audit is the leader specifically because it's the **PMapper successor** (PMapper effectively dead since 2022).
+- **Compliance frameworks:** Prowler 6.8× cloud-audit. If you need PCI-DSS / FedRAMP / GDPR evidence, Prowler wins.
+- **Multi-cloud:** Prowler 14 providers vs cloud-audit 1 (AWS only). For non-AWS shops, cloud-audit is irrelevant; for AWS-heavy shops, breadth doesn't matter.
+
+The numerical picture supports the "Prowler quarterly + cloud-audit daily" pattern that's emerging in 2026 AWS sec practice.
+
 ## How it compares to Prowler
 
 Prowler is **the AWS security standard**: 572 checks, 41 compliance frameworks (CIS, PCI-DSS, HIPAA, SOC2, NIST 800, ISO 27001, GDPR, FedRAMP, NIS2, MITRE ATT&CK, …), 55 auto-remediation fixers, graph-based attack analysis in the Prowler App (Cartography + Neo4j), and multi-cloud coverage spanning Azure, GCP, K8s, M365, and 10+ providers. The cloud-audit README is unusually honest about this.

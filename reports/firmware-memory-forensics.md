@@ -19,6 +19,19 @@ Both are "the part of the toolchain you used to have to source from the vendor (
 
 These are research-grade DFIR tools — the kind that academic groups and incident-response consultancies will adopt quickly, while enterprise SOCs will adopt slowly because their existing playbooks pivot on Volatility / EnCase / FTK.
 
+## How the DFIR OSS landscape covers platform × data source
+
+![DFIR platform × data-source coverage matrix](../assets/landscape/cat-dfir-platform-matrix.png)
+
+Reading the matrix:
+
+- **Volatility 3 is the only tool with cross-OS memory coverage** (Linux + Windows + macOS). The catch is the rightmost column: it **requires external debug symbols**, which is the pain point mquire was built to remove.
+- **mquire owns Linux memory + Linux disk (via page-cache recovery)** without symbols, but does not cover Windows or macOS yet. Pair with Volatility 3 for cross-OS workloads.
+- **The firmware layer is its own world** — CERT UEFI Parser, chipsec, and UEFITool all live in the rightmost column with no overlap with the memory tools. CERT UEFI Parser's `--sbom` output is the bridge to SBOM/compliance pipelines.
+- **AVML is the acquisition tool, not the analyzer.** It produces the `.lime` snapshots mquire reads. The pair `AVML → mquire` is the modern Linux memory-forensics canonical path.
+
+The **rightmost column is annotated as a liability** — `external symbols required` is the cell where you want *less* coverage. Volatility 3 carries that burden today; the field is shifting toward tools that don't need it (mquire is the proof).
+
 ---
 
 ## CERT UEFI Parser — UEFI introspection without vendor SDKs

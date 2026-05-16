@@ -17,6 +17,18 @@ The category exists because the **TeamPCP incident (March 2026)** finally made b
 
 These are the operational counterpart to the AIxCC OSS CRSs already documented in [`ai-vuln-research.md`](./ai-vuln-research.md): one is "find the bug end-to-end in source"; this trio is "compromise the pipeline that ships the code."
 
+## Where each tool sits in the CI/CD attack surface
+
+![CI/CD OSS capability matrix](../assets/landscape/cat-cicd-capability-matrix.png)
+
+Three things this matrix makes obvious:
+
+1. **Plumber + SmokedMeat are the matched defense/offense pair.** Plumber covers every audit class (branch protection, OIDC misconfig, action pinning) that SmokedMeat exploits — including the rare ones (GitLab support, full-token-scope audit). They are not direct competitors; they're complementary.
+2. **poutine and zizmor are SAST-only.** Both are excellent at workflow injection and trigger detection, but neither touches secret extraction, cache poisoning, LOTP, or cloud pivot. Treat them as the *first line* of a defensive stack, not the whole stack.
+3. **Gato-X is the most overlapping with SmokedMeat** — same enumeration-and-abuse model, but without the full kill-chain orchestration. If you've used Gato-X, SmokedMeat is the natural upgrade.
+
+The cell scoring is intentionally binary-ish (`·` none / `◐` partial / `●` full); see [`assets/landscape/generate_per_category.py`](../assets/landscape/generate_per_category.py) for the raw matrix.
+
 ---
 
 ## SmokedMeat — the CI/CD Metasploit

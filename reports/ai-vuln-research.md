@@ -16,6 +16,18 @@ The most strategically important comparison in this report. Both repos are the *
 
 The asymmetry of size is informative: Buttercup is a **fully deployed system**, Taskflow Agent is a **framework you stand up workflows on**.
 
+## How the AI vuln-research OSS lineup compares
+
+![AI vulnerability research CRS / agent matrix](../assets/landscape/cat-ai-vuln-research-matrix.png)
+
+The matrix extends the table above to the full 2025–2026 OSS lineup and surfaces three useful observations:
+
+1. **The AIxCC trio (Buttercup / Atlantis / Theori) are nearly identical in capability** — same CRS shape, same bug-discovery + auto-patching + multi-agent + fuzzing-integrated stack. Practical differentiation is in deployment ergonomics and language-target coverage, not headline features. If you need to pick one, pick whichever ships the cleanest "developer-laptop" experience for the languages you care about.
+2. **Taskflow Agent and Trailmark are the framework-first picks.** Neither does auto-patching (Taskflow can if you wire it; Trailmark is read-only callgraph + semantic graph), and neither was an AIxCC finalist. They're the OSS substrate the *next* generation of CRSs will be built on — including by GitHub Security Lab itself.
+3. **Pike is the outlier** — pure analyst-facing chat UI over Linux `strace` recordings, not a CRS at all. Included to show that "AI vuln research" is a broader category than "build the next AIxCC entry."
+
+The columns to bias on for selection are **MCP server / consumer** (every CRS will need it for IDE integration), **callgraph / dataflow** (the differentiator that decides false-positive rate), and **defender-facing UX** (the bottleneck for adoption beyond research labs).
+
 ---
 
 ## Buttercup — the "complete CRS" approach
