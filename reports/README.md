@@ -18,6 +18,7 @@ In-depth exploration of the submodules under [`../sources/`](../sources/), focus
 | [secret-scanning.md](./secret-scanning.md) | Secret scanning with CEL + BPE naturalness | Betterleaks (vs Gitleaks / TruffleHog) |
 | [c2-frameworks.md](./c2-frameworks.md) | C2 / red-team framework landscape comparison | Sliver, Mythic, Empire 6.0, Havoc, C4, SmokedMeat, Beaconator (+ Cobalt Strike for ref) |
 | [perimeter-stack.md](./perimeter-stack.md) | **Perimeter stack landscape** — chain coverage, ProjectDiscovery dominance, Nuclei templates, recon comparison | All 16 perimeter submodules + adjacent appsec (Vespasian/Hadrian/Brutus) |
+| [code/](./code/) | **Code-level analyses (33 reports + cross-cutting [`_landscape.md`](./code/_landscape.md))** — architecture + novel implementation details from actual source, one per tool, every claim grounded in `path:LINE` references | 33 of the ~40 mirrored submodules across all categories. The landscape report adds analytics: language distribution, architectural-pattern heatmap (12 patterns), storage backends, codebase size, test depth, license posture, and the code-quality issues surfaced during review. |
 | [landscape-analysis.md](./landscape-analysis.md) | **Cross-cutting trend analysis + forward predictions** (charts + mermaid) | All tools, aggregated |
 
 ## Cross-cutting observations

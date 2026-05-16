@@ -7,7 +7,7 @@ The 12-month story is short:
 1. **ProjectDiscovery built the entire recon-to-scan chain** — and now owns it.
 2. **API security splintered into 5+ specialists**, each owning one workflow stage.
 3. **Nuclei templates became infrastructure** — 12k+ active templates, and AI-generated templates emerged as a separate repo in 2026.
-4. **Caido is the credible OSS Burp alternative**, finally — the first Rust-native fully-modern web pentest UI.
+4. **Caido is the credible Burp alternative** in the *product* sense — first Rust-native modern web pentest UI — **but its source is not on GitHub**. The public `caido/caido` repo contains only brand assets + issue templates; see [`code/caido.md`](./code/caido.md) for the verification and the one source-grounded fact that is available (plugins explicitly run with unrestricted host access — no Wasm sandbox).
 5. **Brutus closes the credential-validation gap** in the chain (already covered in [`ci-cd-security.md`](./ci-cd-security.md); included here for chain completeness).
 
 ---
