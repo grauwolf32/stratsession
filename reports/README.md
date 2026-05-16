@@ -16,6 +16,7 @@ In-depth exploration of the submodules under [`../sources/`](../sources/), focus
 | [firmware-memory-forensics.md](./firmware-memory-forensics.md) | UEFI firmware parsing + Linux memory forensics | CERT UEFI Parser, mquire |
 | [defensive-ops.md](./defensive-ops.md) | Host firewall + OSS SOAR | Little Snitch for Linux, Allama |
 | [secret-scanning.md](./secret-scanning.md) | Secret scanning with CEL + BPE naturalness | Betterleaks (vs Gitleaks / TruffleHog) |
+| [landscape-analysis.md](./landscape-analysis.md) | **Cross-cutting trend analysis + forward predictions** (charts + mermaid) | All tools, aggregated |
 
 ## Cross-cutting observations
 

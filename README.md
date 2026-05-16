@@ -151,6 +151,7 @@ Each item below is a one-paragraph entry. Per-conference notes live under [`conf
 - **For defensive program planning** — pair offensive items with the AIxCC CRS releases and Kyverno/Kubewarden/Falco track to think in attack→detection→remediation triplets, not isolated tools.
 - **For ongoing signal between conferences** — companion index of security research blogs at [`blogs/`](./blogs/) covers ~27 sources organized into seven categories (offensive vendors, attack-surface / N-day shops, web research, cloud-native, supply chain, big-tech vendor research, newsletters).
 - **For technical deep-dives** — per-class comparison reports at [`reports/`](./reports/) explore the tools mirrored under [`sources/`](./sources/) as git submodules (categories: `appsec/`, `perimeter/`, `ci-cd/`, `cloud/`, `dfir/`, `defense/`). Each report identifies what's actually novel in each tool and compares tools within the same class.
+- **For cross-cutting trend analysis** — [`reports/landscape-analysis.md`](./reports/landscape-analysis.md) aggregates the inventory into charts and mermaid diagrams (release cadence, category distribution, license shifts, MCP adoption, theme convergence) with forward-looking predictions for 2026-H2 / 2027-H1.
 
 ## Caveats
 - A small number of items are **announcements without verified release links** (e.g. RSAC 2026 Cisco "DefenseClaw", several BH USA Arsenal items reported only in press coverage — Black Hat's own pages returned 403 on fetch). These are clearly marked in the per-conference files.
