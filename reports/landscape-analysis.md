@@ -300,6 +300,7 @@ The aggregate charts above ride on top of **per-category capability matrices** e
 | DFIR / forensics | Platform × data-source coverage (Linux/Win/Mac × memory/disk/firmware/live) | [`firmware-memory-forensics.md`](./firmware-memory-forensics.md) |
 | Secret scanning | Feature matrix: Gitleaks / TruffleHog / Betterleaks / ggshield × 9 features | [`secret-scanning.md`](./secret-scanning.md) |
 | C2 / red-team | Transport + evasion + language comparison (4-panel) | [`c2-frameworks.md`](./c2-frameworks.md) |
+| Perimeter stack | Chain coverage heatmap + ProjectDiscovery dominance + Nuclei templates + recon comparison (4 charts) | [`perimeter-stack.md`](./perimeter-stack.md) |
 
 All charts are reproducible from [`assets/landscape/generate_per_category.py`](../assets/landscape/generate_per_category.py). The underlying data is hand-curated based on the project READMEs (verified May 2026) — when a tool ships a major release, update the matrix at the top of the corresponding function.
 

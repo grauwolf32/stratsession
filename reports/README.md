@@ -17,6 +17,7 @@ In-depth exploration of the submodules under [`../sources/`](../sources/), focus
 | [defensive-ops.md](./defensive-ops.md) | Host firewall + OSS SOAR | Little Snitch for Linux, Allama |
 | [secret-scanning.md](./secret-scanning.md) | Secret scanning with CEL + BPE naturalness | Betterleaks (vs Gitleaks / TruffleHog) |
 | [c2-frameworks.md](./c2-frameworks.md) | C2 / red-team framework landscape comparison | Sliver, Mythic, Empire 6.0, Havoc, C4, SmokedMeat, Beaconator (+ Cobalt Strike for ref) |
+| [perimeter-stack.md](./perimeter-stack.md) | **Perimeter stack landscape** — chain coverage, ProjectDiscovery dominance, Nuclei templates, recon comparison | All 16 perimeter submodules + adjacent appsec (Vespasian/Hadrian/Brutus) |
 | [landscape-analysis.md](./landscape-analysis.md) | **Cross-cutting trend analysis + forward predictions** (charts + mermaid) | All tools, aggregated |
 
 ## Cross-cutting observations
