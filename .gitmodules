@@ -94,3 +94,30 @@
 [submodule "sources/perimeter/crapi"]
 	path = sources/perimeter/crapi
 	url = https://github.com/OWASP/crAPI.git
+[submodule "sources/ci-cd/smokedmeat"]
+	path = sources/ci-cd/smokedmeat
+	url = https://github.com/boostsecurityio/smokedmeat.git
+[submodule "sources/ci-cd/plumber"]
+	path = sources/ci-cd/plumber
+	url = https://github.com/getplumber/plumber.git
+[submodule "sources/perimeter/brutus"]
+	path = sources/perimeter/brutus
+	url = https://github.com/praetorian-inc/brutus.git
+[submodule "sources/appsec/betterleaks"]
+	path = sources/appsec/betterleaks
+	url = https://github.com/betterleaks/betterleaks.git
+[submodule "sources/cloud/cloud-audit"]
+	path = sources/cloud/cloud-audit
+	url = https://github.com/gebalamariusz/cloud-audit.git
+[submodule "sources/dfir/cert-uefi-parser"]
+	path = sources/dfir/cert-uefi-parser
+	url = https://github.com/cmu-sei/cert-uefi-parser.git
+[submodule "sources/dfir/mquire"]
+	path = sources/dfir/mquire
+	url = https://github.com/trailofbits/mquire.git
+[submodule "sources/defense/littlesnitch-linux"]
+	path = sources/defense/littlesnitch-linux
+	url = https://github.com/obdev/littlesnitch-linux.git
+[submodule "sources/defense/allama"]
+	path = sources/defense/allama
+	url = https://github.com/digitranslab/allama.git

@@ -28,6 +28,11 @@ Mature tools (OWASP ZAP, OWASP Amass, WAF-A-MoLE, etc.) are intentionally **excl
 | [`naabu/`](./naabu) | https://github.com/projectdiscovery/naabu | Modern Go port scanner; v2.3 active 2025-2026 |
 | [`uncover/`](./uncover) | https://github.com/projectdiscovery/uncover | Search-engine-driven recon (Shodan / Censys / Fofa / Quake / Hunter) — recent addition to PD suite |
 
+### Modern credential testing
+| Path | Upstream | Why recent |
+|---|---|---|
+| [`brutus/`](./brutus) | https://github.com/praetorian-inc/brutus | Praetorian's Go-native multi-protocol credential validator (24 protocols, embedded SSH bad keys, RDP sticky-keys MITRE T1546.008 chain, IronRDP-via-WASM, `naabu | nerva | brutus` pipeline). Hydra successor. **(new 2026)** |
+
 ### Recent API security stack
 | Path | Upstream | Why recent |
 |---|---|---|

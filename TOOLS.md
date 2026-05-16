@@ -34,6 +34,8 @@ Conventions:
 | OWASP Coraza | https://github.com/corazawaf/coraza | Go-native WAF (ModSecurity successor). |
 | OWASP Core Rule Set (CRS) | https://github.com/coreruleset/coreruleset | Industry-standard WAF rule set. Next-gen rule language in progress. |
 | PatchLeaks | https://github.com/hatlesswizard/patchleaks | Locates vulnerable code in patches via context-aware analysis. **(new 2025)** |
+| ★ Betterleaks | https://github.com/betterleaks/betterleaks | Drop-in successor to Gitleaks by the same author (Zach Rice) + Aikido. CEL filters, BPE-based naturalness scoring, per-rule HTTP validation. **(new 2026)** |
+| CERT UEFI Parser | https://github.com/cmu-sei/cert-uefi-parser | CMU/SEI CERT's NDA-free UEFI ROM / installer / PE parser. Construct-based, extensible; emits SBOM-shaped JSON. **(new 2026)** |
 
 ## 3. Fuzzing
 
@@ -76,6 +78,7 @@ Conventions:
 | OAuthSeeker (Praetorian) | https://github.com/praetorian-inc/oauthseeker | Azure/M365 OAuth phishing simulator. **(new 2025)** |
 | maSSO (Doyensec) | https://github.com/doyensec/cloudsec-tidbits/tree/main/lab-masso | Malicious IdP for OIDC/SAML SP security testing. **(new 2026)** |
 | ForceHound (NetSPI) | https://github.com/NetSPI/ForceHound | Salesforce permission graph → BloodHound CE. **(new 2026)** |
+| ★ cloud-audit | https://github.com/gebalamariusz/cloud-audit | AWS-only opinionated scanner (94 checks / 23 services). Attack-chain correlation (31 rules), IAM escalation graph (61 methods + AssumeRole lateral), what-if simulator, AI-SPM checks, MCP server, breach-cost estimates. MIT. **(new 2026)** |
 
 ## 6. Identity / Active Directory / Entra
 
@@ -99,6 +102,9 @@ Conventions:
 | AIMaL | https://github.com/endritshaqiri/aimal | AI-mutated malware launcher for red-team simulation. **(new 2025)** |
 | Messenger | https://github.com/skylerknecht/messenger | Tunneling toolkit (local/reverse/dynamic forwarding). **(new 2025)** |
 | Blackdagger | https://github.com/erdemozgen/blackdagger | YAML DAG automation for DevSecOps + red team. **(new 2025)** |
+| ★ SmokedMeat | https://github.com/boostsecurityio/smokedmeat | First OSS red-team framework purpose-built for CI/CD pipelines ("Like Metasploit, but for CI/CD"). Full kill-chain: poutine-based recon → injection/LOTP/cache-poison delivery → `/proc` runner memory scrape → OIDC cloud pivots. Ships with the Whooli deliberately-vulnerable training org. AGPL-3.0. **(new 2026)** |
+| ★ Plumber | https://github.com/getplumber/plumber | GitLab-first + GitHub Actions CI/CD compliance scanner. One Rego engine, two provider IRs, emits PBOM + CycloneDX. MPL-2.0. **(new 2026)** |
+| ★ Brutus | https://github.com/praetorian-inc/brutus | Praetorian's Go-native multi-protocol credential validator (24 protocols, embedded SSH bad keys, RDP sticky-keys MITRE T1546.008 detection + exploitation, IronRDP-via-WASM, `naabu | nerva | brutus` pipeline). Hydra successor. **(new 2026)** |
 
 ## 8. AppSec / web / API offensive tooling
 
@@ -137,8 +143,18 @@ Conventions:
 | Lex Sleuther (CrowdStrike) | https://github.com/crowdstrike/lex_sleuther | Script-language ID via lexer + ridge regression. **(new 2025)** |
 | Attack Flow Detector | https://github.com/ezzeldinadel/attack_flow_detector | Map alerts to MITRE ATT&CK using explainable ML (no LLM). **(new 2025)** |
 | RETINA | https://github.com/cecio/retina | Retro-game-style malware-triage UX. **(new 2025)** |
-| mquire (Trail of Bits) | https://github.com/trailofbits/mquire | Zero-dependency Linux memory forensics via BTF/kallsyms. **(new 2026)** |
+| ★ mquire (Trail of Bits) | https://github.com/trailofbits/mquire | Zero-dependency Linux memory forensics via BTF/kallsyms. SQL shell over kernel data structures; page-cache file recovery; rootkit detection via multi-source task discovery. Apache-2.0. **(new 2026)** |
 | CoBRA (Trail of Bits) | https://github.com/trailofbits/CoBRA | Mixed-Boolean-Arithmetic expression deobfuscator. **(new 2026)** |
+
+## 10b. Defensive ops (host firewall + SOAR)
+
+| Tool | Repo | Notes |
+|---|---|---|
+| ★ Little Snitch for Linux (OSS components) | https://github.com/obdev/littlesnitch-linux | Objective Development's official Linux port. eBPF kernel programs + Rust common + JS web UI. GPL-2.0 OSS portion (full product also includes proprietary userspace). **(new 2026)** |
+| OpenSnitch | https://github.com/evilsocket/opensnitch | The mature fully-OSS alternative; netfilter NFQUEUE + Python daemon + Qt UI. |
+| ★ Allama | https://github.com/digitranslab/allama | Open-source SOAR with visual workflow builder, autonomous LLM agents (PydanticAI + LiteLLM), Temporal durable execution, WASM sandbox for custom Python, 80+ integrations, multi-tenant + SSO. AGPL-3.0. **(new 2026)** |
+| Shuffle | https://github.com/Shuffle/Shuffle | The mature OSS SOAR competitor; broader integration catalog, own workflow runtime. |
+| TheHive + Cortex | https://github.com/TheHive-Project/TheHive | OSS incident-response case management + analyzer framework. Pairs well with Allama. |
 
 ## 11. Recon / OSINT
 
@@ -169,15 +185,21 @@ See https://www.darpa.mil/news/2025/aixcc-results for the canonical list as rele
 
 ## Quick "what to POC first" shortlist
 
-If your team can only evaluate **5–7 new tools** this quarter, this is my picks across the catalog:
+If your team can only evaluate **5–7 new tools** this quarter, here are my picks across the catalog (updated May 2026 for the post-TeamPCP wave):
 
-1. **Buttercup** — the most consequential OSS release of 2025–2026; representative of AI-assisted vuln research becoming actually usable.
-2. **Seclab Taskflow Agent** — same theme, GitHub-side; fits well with existing CodeQL workflows.
-3. **Spotter** + **Kyverno** + **Copacetic** — three-piece Kubernetes posture upgrade stack.
-4. **Vespasian** + **Hadrian** — biggest 2026 OSS step forward in API attack-surface coverage.
-5. **Trivy MCP** — easiest way to plug your existing Trivy install into agent workflows.
-6. **EntraGoat** + **maSSO** — for Entra ID / SSO test environments.
-7. **ForceHound** + **MSSQLHound** (Go) — if you have Salesforce or MSSQL in your attack surface but no graph coverage.
+1. **SmokedMeat + Whooli** — set up the deliberately-vulnerable training org and run a CI/CD tabletop. Highest signal-per-hour security exercise of 2026.
+2. **Plumber** — drop in as a CI/CD compliance gate on GitLab today (v0.2.x stable); evaluate v0.3.0 for GitHub Actions in parallel.
+3. **Buttercup** — the most consequential OSS release of 2025; representative of AI-assisted vuln research becoming actually usable.
+4. **cloud-audit** — fastest way to get an actionable AWS posture report with attack-chain ranking + reviewable Terraform/CLI remediation. Run alongside Prowler, not instead of.
+5. **Betterleaks** — drop-in Gitleaks replacement; immediate FP reduction via BPE naturalness scoring. Migration is incremental.
+6. **mquire** — adopt in IR / forensics workflows when external debug symbols aren't available. Big quality-of-life upgrade over Volatility for Linux memory.
+7. **Brutus** — replace Hydra in your credential-validation pipelines, especially if you use `naabu` already.
+
+Honorable mentions for theme parity:
+- **Vespasian + Hadrian** — biggest 2026 OSS step forward in API attack-surface coverage.
+- **Spotter + Kyverno + Copacetic** — three-piece Kubernetes posture upgrade stack.
+- **Allama** — if you're shopping for OSS SOAR specifically.
+- **CERT UEFI Parser** — only if firmware analysis is on your team's roadmap; otherwise file under "good to know exists."
 
 ---
 

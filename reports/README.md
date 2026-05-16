@@ -1,6 +1,6 @@
 # Per-class deep-dive reports
 
-In-depth exploration of the 17 AppSec submodules under [`../sources/appsec/`](../sources/appsec/), focused on **what each tool actually does that's new or unusual** — not feature-list marketing. Where multiple tools share a class, they are compared side-by-side.
+In-depth exploration of the submodules under [`../sources/`](../sources/), focused on **what each tool actually does that's new or unusual** — not feature-list marketing. Where multiple tools share a class, they are compared side-by-side.
 
 | Report | Class | Tools compared |
 |---|---|---|
@@ -11,13 +11,20 @@ In-depth exploration of the 17 AppSec submodules under [`../sources/appsec/`](..
 | [api-security.md](./api-security.md) | API discovery + authorization testing | Vespasian, Hadrian |
 | [vulnmgmt-sbom.md](./vulnmgmt-sbom.md) | Vulnerability management & SBOM | DefectDojo, Sunshine |
 | [reference-design.md](./reference-design.md) | Reference designs & training labs | SafeUpdater (Electron), DVBE (Damn Vulnerable Browser Extension) |
+| [ci-cd-security.md](./ci-cd-security.md) | CI/CD pipeline security (offensive + defensive + credential validation) | SmokedMeat, Plumber, Brutus |
+| [cloud-posture.md](./cloud-posture.md) | AWS posture + attack-chain correlation | cloud-audit (vs Prowler) |
+| [firmware-memory-forensics.md](./firmware-memory-forensics.md) | UEFI firmware parsing + Linux memory forensics | CERT UEFI Parser, mquire |
+| [defensive-ops.md](./defensive-ops.md) | Host firewall + OSS SOAR | Little Snitch for Linux, Allama |
+| [secret-scanning.md](./secret-scanning.md) | Secret scanning with CEL + BPE naturalness | Betterleaks (vs Gitleaks / TruffleHog) |
 
 ## Cross-cutting observations
 
-Three themes show up repeatedly when you read these 17 codebases together:
+Five themes show up repeatedly when you read these codebases together:
 
-1. **MCP wrappers are the new "give me a CLI"** — Trivy, Seclab Taskflow Agent, and Hadrian's planner all ship MCP servers or MCP-callable surfaces. Wrapping an existing CLI in an MCP server is now a *one-week* effort that turns a tool into an agent-callable capability. Trivy went from CLI to MCP server in a tagged plugin; Hadrian uses MCP toolboxes from the start.
-2. **The "agentic framework + YAML grammar" pattern is converging** — Seclab Taskflow Agent's grammar (taskflow / personality / toolbox / prompt / model_config files) and Hadrian's template grammar (endpoint_selector / role_selector / http / detection / test_phases) are independent implementations of nearly the same idea: declarative YAML that the LLM consumes as both prompt and orchestration scaffolding. This is the operationalization of "agents" in security tooling.
-3. **The vendor-OSS pipeline has accelerated** — Praetorian (Vespasian/Hadrian/Julius), Trail of Bits (Buttercup/Trailmark/CoBRA/mquire/Ruzzy), Doyensec (SafeUpdater/maSSO), and GitHub Security Lab (Taskflow Agent) all run a *post-engagement → OSS release* pipeline. Tools used internally by consultants are now reaching public release in months, not years. The repos under `sources/appsec/` reflect this: ~half were first-released or majorly rewritten inside the past 12 months.
+1. **MCP wrappers are the new "give me a CLI"** — Trivy, Seclab Taskflow Agent, Hadrian's planner, and now `cloud-audit` all ship MCP servers or MCP-callable surfaces. Wrapping an existing CLI in an MCP server is a *one-week* effort that turns a tool into an agent-callable capability. Expect Plumber, Betterleaks, Brutus, and mquire MCP wrappers within Q3 2026.
+2. **The "agentic framework + YAML grammar" pattern is converging** — Seclab Taskflow Agent's grammar (taskflow / personality / toolbox / prompt / model_config), Hadrian's template grammar (endpoint_selector / role_selector / http / detection / test_phases), Allama's visual workflow builder, and Plumber's Rego policies are independent implementations of the same idea: declarative configuration that LLM agents or policy engines consume as orchestration scaffolding. This is how "agents" become operationalizable in security tooling.
+3. **The vendor-OSS pipeline has accelerated** — Praetorian (Vespasian / Hadrian / Julius / Brutus), Trail of Bits (Buttercup / Trailmark / CoBRA / mquire / Ruzzy), Doyensec (SafeUpdater / maSSO), GitHub Security Lab (Taskflow Agent), Boost Security Labs (poutine / SmokedMeat), Aikido (Betterleaks), CMU/SEI CERT (UEFI Parser), Objective Development (Little Snitch for Linux) all run a *post-engagement → OSS release* (or *commercial-product OSS-component*) pipeline. Tools used internally are now reaching public release in months, not years.
+4. **CEL is winning the policy-expression-language war** — Spotter (K8s scanning), Plumber (CI/CD compliance), Betterleaks (secret-scanner filters and validators), Kubernetes admission, Envoy, Tekton. The skill is reusable across security-adjacent tools; worth investing in.
+5. **The TeamPCP incident (March 2026) reshaped priorities** — SmokedMeat, Plumber, and Brutus all appeared inside three months of TeamPCP. CI/CD pipeline compromise is no longer a niche risk; it is a tier-1 risk and the OSS tooling shipped accordingly.
 
-The seven reports below each pick *one specific innovation* per tool and explain why it matters — read with that lens.
+The reports below each pick *one specific innovation* per tool and explain why it matters — read with that lens.

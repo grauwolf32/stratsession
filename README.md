@@ -1,6 +1,6 @@
 # Recent Open-Source Security Tools & Approaches
 
-**Strategy-session brief — May 2025 → May 2026**
+**Strategy-session brief — May 2025 → May 2026** (last updated May 16, 2026)
 
 Curated index of open-source tools, frameworks, and approaches surfaced at the major security conferences over the past 12 months. Scope: **AppSec (SAST / SCA / fuzzing / secure SDLC)**, **offensive / red team / pentest**, and **cloud / container / Kubernetes**. AI-security items are included only where they overlap those areas (e.g. LLM-assisted fuzzing, agent red-teaming frameworks used in pentest workflows).
 
@@ -16,6 +16,9 @@ Each item below is a one-paragraph entry. Per-conference notes live under [`conf
 4. **Supply chain went baseline.** SLSA 1.1, GUAC 0.12, Sigstore "supply chain day", OWASP CycloneDX 2.0 preview + the new **Sunshine** SBOM visualizer, and CRA enforcement reset expectations: SBOM + signed provenance is no longer "leading-edge", it is the floor.
 5. **C2 frameworks consolidated; evasion specialized.** **Empire 6.0** (Go agents, marketplace), **C4** (WASM cross-OS plugins), **Beaconator**, **Messenger** (tunneling), **WarHead** (Atom Tables abuse), **BOAZ** (multi-layer EDR evasion) — the offensive tooling market has matured into composable, language-agnostic stacks.
 6. **Hardware / firmware / supply-chain attacks dominated the academic and offensive cons.** ReVault (Dell ControlVault3 on 100+ models, Hexacon), EntrySign (custom x86 microcode, OffensiveCon), Cypherock X1, NVIDIA CUDA driver 0-days, Apple SEP teardown.
+7. **CI/CD pipeline compromise became a tier-1 risk after TeamPCP (March 2026).** A single actor chained GitHub Actions workflow injection to ship malicious updates through **Trivy, LiteLLM, KICS, Telnyx**, and dozens of npm packages. The OSS response shipped within three months: **SmokedMeat** (red-team framework for build pipelines, Boost Security Labs), **Plumber** (GitLab + GitHub CI/CD compliance scanner), **Brutus** (post-compromise credential validator, Praetorian). Companion training environment: **Whooli** — the first deliberately-vulnerable GitHub org.
+8. **OSS forensics removed the "external dependency" requirement.** **CERT UEFI Parser** (CMU/SEI, NDA-free UEFI / installer / PE parsing built on Construct) and **mquire** (Trail of Bits, Linux memory forensics without external debug symbols via kernel-embedded BTF + Kallsyms) both ship in 2026. They attack the same architectural pain point — needing data you can't carry inside the artifact you're analyzing — at different layers of the stack.
+9. **OSS defensive ops caught up with offensive.** **Little Snitch for Linux** (Objective Development's eBPF + Rust per-process firewall, GPL-2.0 OSS components) closes the per-host firewall gap. **Allama** (AGPL-3.0 SOAR with visual workflow builder + LLM agents on Temporal) closes the OSS SOAR gap. **Betterleaks** (drop-in Gitleaks successor by the original author, CEL filters + BPE naturalness scoring) closes the entropy-based-FP gap in secret scanning. **cloud-audit** (MIT, AWS-only opinionated scanner with attack-chain correlation + IAM escalation graph + what-if simulator) closes the "PMapper is dead" gap.
 
 ---
 
@@ -63,6 +66,23 @@ Each item below is a one-paragraph entry. Per-conference notes live under [`conf
 - **DUMPLING** — differential JS-engine fuzzer; 8 new V8 bugs. NDSS 2026.
 - **Fuzzilicon** — post-silicon microcode-guided x86 CPU fuzzer. NDSS 2026.
 - **IoTBec** — LLM-driven firmware fuzzing with signature-based recurring-vuln detection. NDSS 2026.
+
+### CI/CD pipeline security (offensive + defensive + credential)
+- **SmokedMeat** — first OSS red-team framework purpose-built for CI/CD pipelines; full kill-chain (recon via embedded `poutine` SAST → 5 delivery methods incl. LOTP + cache poisoning → `/proc` runner memory secret scrape → OIDC cloud pivots → persistent attack graph). Ships with **Whooli** (the first deliberately-vulnerable GitHub org). AGPL-3.0. → `boostsecurityio/smokedmeat`
+- **Plumber** — GitLab-first (v0.3.0 adds GitHub Actions) CI/CD compliance scanner. One Rego engine, two provider IRs, emits Pipeline Bill of Materials (PBOM) + CycloneDX SBOM. SLSA L3 attested. MPL-2.0. → `getplumber/plumber`
+- **Brutus** — Praetorian's Go-native multi-protocol credential validator (24 protocols, embedded SSH bad-key collection, RDP sticky-keys MITRE T1546.008 detection + exploitation chain, IronRDP-via-WASM, `naabu | nerva | brutus` pipeline). Hydra successor. → `praetorian-inc/brutus`
+
+### Cloud posture & attack-chain
+- **cloud-audit** — opinionated AWS-only scanner (94 checks / 23 services). Attack-chain correlation (31 rules), IAM privilege escalation graph (61 methods, the open-source PMapper replacement), what-if simulator, AI-SPM checks (Bedrock + SageMaker), MCP server, breach-cost estimates, 6 compliance frameworks. MIT. → `gebalamariusz/cloud-audit`
+
+### Firmware & memory forensics (no external symbols / SDKs)
+- **CERT UEFI Parser** — CMU/SEI CERT's NDA-free UEFI ROM / installer / PE parser. Built on Construct; extensible to proprietary vendor formats; emits ASCII / JSON / SBOM-shaped JSON / Qt GUI. → `cmu-sei/cert-uefi-parser` + `cmu-sei/cert-uefi-support`
+- **mquire** — Trail of Bits' Rust DFIR tool. Analyzes Linux memory snapshots **without external debug symbols**, using kernel-embedded BTF + Kallsyms. Interactive SQL shell over kernel data structures; page-cache file recovery via `.dump`; rootkit detection via multi-source task discovery. Apache-2.0. → `trailofbits/mquire`
+
+### Defensive ops (host firewall + SOAR + secret scanning)
+- **Little Snitch for Linux** (OSS components) — Objective Development's official Linux port; eBPF kernel programs + Rust common crate + JavaScript web UI. GPL-2.0. Headless / remote-browser-monitorable. Full product also includes proprietary userspace. → `obdev/littlesnitch-linux`
+- **Allama** — open-source SOAR with visual workflow builder, autonomous LLM agents (PydanticAI + LiteLLM with OpenAI / Anthropic / Azure / Ollama), Temporal-backed durable execution, WebAssembly sandbox for custom Python, 80+ integrations, multi-tenant + SSO. AGPL-3.0. → `digitranslab/allama`
+- **Betterleaks** — drop-in successor to Gitleaks by the original author (Zach Rice, sponsored by Aikido). CEL filters + per-rule HTTP validation + **BPE-based naturalness scoring** (replaces Shannon entropy for natural-language false-positive filtering). → `betterleaks/betterleaks`
 
 ### Offensive / red team frameworks
 - **Empire 6.0** — Go-agent rewrite + module marketplace. DEF CON 33 Demo Labs. → `BC-SECURITY/Empire`
@@ -130,7 +150,7 @@ Each item below is a one-paragraph entry. Per-conference notes live under [`conf
 - **For talent / awareness signals** — the per-conference notes show *who* the active researchers are. Names recur (Madhu Akula, Seth Art, Karl Fosaaen, Donncha Ó Cearbhaill, Trail of Bits, NetSPI, Praetorian).
 - **For defensive program planning** — pair offensive items with the AIxCC CRS releases and Kyverno/Kubewarden/Falco track to think in attack→detection→remediation triplets, not isolated tools.
 - **For ongoing signal between conferences** — companion index of security research blogs at [`blogs/`](./blogs/) covers ~27 sources organized into seven categories (offensive vendors, attack-surface / N-day shops, web research, cloud-native, supply chain, big-tech vendor research, newsletters).
-- **For technical deep-dives** — per-class comparison reports at [`reports/`](./reports/) explore the 17 AppSec tools mirrored under [`sources/appsec/`](./sources/appsec/) as git submodules. Each report identifies what's actually novel in each tool and compares tools within the same class.
+- **For technical deep-dives** — per-class comparison reports at [`reports/`](./reports/) explore the tools mirrored under [`sources/`](./sources/) as git submodules (categories: `appsec/`, `perimeter/`, `ci-cd/`, `cloud/`, `dfir/`, `defense/`). Each report identifies what's actually novel in each tool and compares tools within the same class.
 
 ## Caveats
 - A small number of items are **announcements without verified release links** (e.g. RSAC 2026 Cisco "DefenseClaw", several BH USA Arsenal items reported only in press coverage — Black Hat's own pages returned 403 on fetch). These are clearly marked in the per-conference files.

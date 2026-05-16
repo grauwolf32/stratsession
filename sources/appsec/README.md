@@ -23,6 +23,7 @@ Git submodules of the strongest AppSec tools from [`../../TOOLS.md`](../../TOOLS
 | [`dvbe/`](./dvbe) | https://github.com/infosecak/dvbe | Training | Damn Vulnerable Browser Extension. |
 | [`buttercup/`](./buttercup) | https://github.com/trailofbits/buttercup | AI vuln research | Trail of Bits CRS, AIxCC 2nd place. |
 | [`seclab-taskflow-agent/`](./seclab-taskflow-agent) | https://github.com/GitHubSecurityLab/seclab-taskflow-agent | AI vuln research | GitHub Security Lab AI vuln-triage framework. |
+| [`betterleaks/`](./betterleaks) | https://github.com/betterleaks/betterleaks | Secret scanning | Drop-in Gitleaks successor by the same author. CEL filters, BPE-based naturalness scoring, per-rule HTTP validation. **(new 2026)** |
 
 ## Common operations
 
