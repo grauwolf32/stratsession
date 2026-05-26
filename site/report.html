@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report — StratSession</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark-dimmed.min.css">
+  <style>
+    .report-viewer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .report-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .report-nav a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .report-nav a:hover { text-decoration: underline; }
+    .report-nav .breadcrumb { color: var(--text-muted); font-size: 0.85rem; }
+    .report-nav .report-title-nav { color: var(--text-primary); font-weight: 600; font-size: 0.9rem; }
+
+    .report-body { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Markdown rendered content */
+    .report-body h1 {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--accent-blue);
+      padding-bottom: 0.6rem;
+      margin: 0 0 1.5rem;
+      line-height: 1.3;
+    }
+    .report-body h2 {
+      font-size: 1.35rem;
+      color: var(--accent-blue);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .report-body h3 {
+      font-size: 1.1rem;
+      color: var(--accent-amber);
+      margin: 2rem 0 0.75rem;
+    }
+    .report-body h4 {
+      font-size: 1rem;
+      color: var(--accent-green);
+      margin: 1.5rem 0 0.5rem;
+    }
+    .report-body p {
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0 0 1rem;
+    }
+    .report-body strong { color: var(--text-primary); }
+    .report-body em { color: var(--text-secondary); font-style: italic; }
+    .report-body a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent-blue);
+    }
+    .report-body a:hover { border-bottom-style: solid; }
+
+    .report-body ul, .report-body ol {
+      color: var(--text-secondary);
+      margin: 0 0 1rem 1.5rem;
+      line-height: 1.75;
+    }
+    .report-body li { margin-bottom: 0.3rem; }
+    .report-body li strong { color: var(--text-primary); }
+
+    .report-body blockquote {
+      border-left: 3px solid var(--accent-amber);
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      background: var(--accent-amber-dim);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .report-body blockquote p { color: var(--text-secondary); margin: 0; }
+
+    .report-body code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: var(--bg-input);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--accent-amber);
+    }
+    .report-body pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem;
+      line-height: 1.5;
+    }
+    .report-body pre code {
+      background: none;
+      padding: 0;
+      color: var(--text-primary);
+      font-size: 0.82rem;
+    }
+
+    .report-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Tables */
+    .report-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.85rem;
+    }
+    .report-body th {
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .report-body td {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .report-body tr:nth-child(even) { background: rgba(30, 41, 59, 0.3); }
+    .report-body tr:hover { background: rgba(52, 152, 219, 0.08); }
+
+    /* Mermaid diagrams */
+    .mermaid {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 1rem 0 1.5rem;
+      text-align: center;
+      overflow-x: auto;
+    }
+    .mermaid svg { max-width: 100%; }
+
+    /* Table of contents (auto-generated) */
+    .report-toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin: 0 0 2rem;
+    }
+    .report-toc h4 {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.75rem;
+    }
+    .report-toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .report-toc li { margin: 0.3rem 0; }
+    .report-toc li.toc-h3 { padding-left: 1rem; }
+    .report-toc a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color var(--transition-fast);
+    }
+    .report-toc a:hover { color: var(--accent-blue); }
+
+    .report-loading {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+    .report-loading .spinner {
+      display: inline-block;
+      width: 32px; height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .report-error {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--accent-red);
+    }
+
+    /* Report index sidebar for wide screens */
+    @media (min-width: 1200px) {
+      .report-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 2rem;
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+      .report-viewer { max-width: none; margin: 0; padding: 0; }
+      .report-sidebar {
+        position: sticky;
+        top: 60px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+      .report-sidebar h4 {
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin: 0 0 0.5rem;
+      }
+      .report-sidebar a {
+        display: block;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.8rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 4px;
+        margin-bottom: 1px;
+        transition: background var(--transition-fast), color var(--transition-fast);
+      }
+      .report-sidebar a:hover,
+      .report-sidebar a.active {
+        background: var(--accent-blue-dim);
+        color: var(--accent-blue);
+      }
+    }
+    @media (max-width: 1199px) {
+      .report-sidebar { display: none; }
+      .report-layout { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="report-nav">
+  <a href="index.html">&#8592; Dashboard</a>
+  <span class="breadcrumb">/</span>
+  <span class="report-title-nav" id="report-title-nav">Loading...</span>
+</nav>
+
+<div class="report-layout">
+  <aside class="report-sidebar" id="report-sidebar">
+    <h4>All Reports</h4>
+    <div id="report-list"></div>
+  </aside>
+  <div class="report-viewer">
+    <div id="report-content">
+      <div class="report-loading">
+        <div class="spinner"></div>
+        <div>Loading report...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+(function() {
+  const REPORTS = [
+    { id: 'ai-vuln-research', title: 'AI-Driven Vulnerability Discovery' },
+    { id: 'api-security', title: 'API Security' },
+    { id: 'c2-frameworks', title: 'C2 / Red-Team Frameworks' },
+    { id: 'ci-cd-security', title: 'CI/CD Pipeline Security' },
+    { id: 'cloud-posture', title: 'Cloud Posture' },
+    { id: 'defensive-ops', title: 'Defensive Ops' },
+    { id: 'ebpf-runtime-detection', title: 'eBPF Runtime Detection' },
+    { id: 'firmware-memory-forensics', title: 'Firmware & Memory Forensics' },
+    { id: 'fuzzing', title: 'Fuzzing Engines & Frameworks' },
+    { id: 'fuzzing-research-2025-2026', title: 'Fuzzing Research Frontier' },
+    { id: 'identity-attack-path', title: 'Identity / AD Attack Path' },
+    { id: 'kubernetes-security', title: 'Kubernetes Security' },
+    { id: 'landscape-analysis', title: 'Landscape Analysis' },
+    { id: 'llm-redteam', title: 'LLM Red-Team & Agent Abuse' },
+    { id: 'perimeter-stack', title: 'Perimeter Stack' },
+    { id: 'reference-design', title: 'Reference Designs' },
+    { id: 'scanners', title: 'Vulnerability Scanners' },
+    { id: 'secret-scanning', title: 'Secret Scanning' },
+    { id: 'teampcp-postmortem', title: 'TeamPCP Post-Mortem' },
+    { id: 'vulnmgmt-sbom', title: 'Vuln Management & SBOM' },
+    { id: 'waf', title: 'Web Application Firewalls' },
+  ];
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    themeVariables: {
+      darkMode: true,
+      background: '#1a2035',
+      primaryColor: '#3498db',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#334155',
+      lineColor: '#475569',
+      secondaryColor: '#f39c12',
+      tertiaryColor: '#1e293b',
+    }
+  });
+
+  function getReportId() {
+    const params = new URLSearchParams(window.location.search);
+    let id = params.get('id');
+    if (id) return id;
+    const path = window.location.pathname;
+    const match = path.match(/reports\/([^/.]+)\.md/);
+    if (match) return match[1];
+    return null;
+  }
+
+  function buildSidebar() {
+    const list = document.getElementById('report-list');
+    if (!list) return;
+    const currentId = getReportId();
+    list.innerHTML = REPORTS.map(r =>
+      `<a href="report.html?id=${r.id}" class="${r.id === currentId ? 'active' : ''}">${r.title}</a>`
+    ).join('');
+  }
+
+  function generateToc(html) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    const headings = tmp.querySelectorAll('h2, h3');
+    if (headings.length < 3) return '';
+    let toc = '<div class="report-toc"><h4>Contents</h4><ul>';
+    headings.forEach(h => {
+      const level = h.tagName === 'H3' ? 'toc-h3' : '';
+      const id = h.id || h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      h.id = id;
+      toc += `<li class="${level}"><a href="#${id}">${h.textContent}</a></li>`;
+    });
+    toc += '</ul></div>';
+    // Re-serialize with IDs
+    return { toc, html: tmp.innerHTML };
+  }
+
+  async function renderMermaidBlocks() {
+    const blocks = document.querySelectorAll('.report-body pre code.language-mermaid');
+    for (const block of blocks) {
+      const pre = block.parentElement;
+      const code = block.textContent;
+      const container = document.createElement('div');
+      container.className = 'mermaid';
+      container.textContent = code;
+      pre.replaceWith(container);
+    }
+    if (document.querySelectorAll('.mermaid').length > 0) {
+      await mermaid.run({ querySelector: '.mermaid' });
+    }
+  }
+
+  async function loadReport() {
+    const id = getReportId();
+    const container = document.getElementById('report-content');
+    const titleNav = document.getElementById('report-title-nav');
+
+    if (!id) {
+      container.innerHTML = `
+        <div class="report-error">
+          <h2>No report specified</h2>
+          <p>Select a report from the sidebar or go back to the <a href="index.html">dashboard</a>.</p>
+        </div>`;
+      titleNav.textContent = 'Reports';
+      return;
+    }
+
+    const report = REPORTS.find(r => r.id === id);
+    if (report) {
+      titleNav.textContent = report.title;
+      document.title = report.title + ' — StratSession';
+    } else {
+      titleNav.textContent = id;
+    }
+
+    try {
+      const res = await fetch(`reports/${id}.md`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const md = await res.text();
+
+      marked.setOptions({
+        highlight: function(code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(code, { language: lang }).value;
+          }
+          return hljs.highlightAuto(code).value;
+        },
+        gfm: true,
+        breaks: false,
+      });
+
+      let html = marked.parse(md);
+
+      // Fix relative links to other reports
+      html = html.replace(/href="\.\/([^"]+)\.md"/g, 'href="report.html?id=$1"');
+      html = html.replace(/href="([^"#/][^"]*?)\.md"/g, (match, path) => {
+        const name = path.replace(/^\.\.\/reports\//, '').replace(/^reports\//, '');
+        if (REPORTS.find(r => r.id === name)) {
+          return `href="report.html?id=${name}"`;
+        }
+        return match;
+      });
+
+      // Generate TOC
+      const tocResult = generateToc(html);
+      if (tocResult) {
+        html = tocResult.html;
+        container.innerHTML = `<div class="report-body">${tocResult.toc}${html}</div>`;
+      } else {
+        container.innerHTML = `<div class="report-body">${html}</div>`;
+      }
+
+      await renderMermaidBlocks();
+
+    } catch (err) {
+      container.innerHTML = `
+        <div class="report-error">
+          <h2>Failed to load report</h2>
+          <p>${err.message}</p>
+          <p><a href="index.html">Back to dashboard</a></p>
+        </div>`;
+    }
+  }
+
+  buildSidebar();
+  loadReport();
+})();
+</script>
+</body>
+</html>

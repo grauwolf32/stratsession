@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSS Security Tooling Landscape 2025-2026 — Strategy Session Brief</title>
+  <meta name="description" content="Curated index of 60+ open-source security tools, frameworks, and approaches from 12 conferences (May 2025 to May 2026). Strategy session brief covering AppSec, offensive/red team, cloud/container/Kubernetes security.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OSS Security Tooling Landscape 2025-2026">
+  <meta property="og:description" content="Strategy session brief: 60+ tools, 12 conferences, 9 themes. AppSec, red team, cloud security.">
+  <meta property="og:url" content="https://github.com/grauwolf32/stratsession">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSS Security Tooling Landscape 2025-2026">
+  <meta name="twitter:description" content="Strategy session brief: 60+ tools, 12 conferences, 9 themes.">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Sidebar Toggle (mobile) -->
+<button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- ============================================================
+     SIDEBAR NAVIGATION
+     ============================================================ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span class="logo-icon">&#9881;</span>
+      <span>StratSession</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav" aria-label="Main navigation">
+    <div class="nav-section-title">Overview</div>
+    <a href="#dashboard" class="nav-link active">
+      <span class="nav-icon">&#9632;</span> Dashboard
+    </a>
+    <a href="#themes" class="nav-link">
+      <span class="nav-icon">&#9670;</span> Themes
+    </a>
+
+    <div class="nav-section-title">Content</div>
+    <a href="#reports" class="nav-link">
+      <span class="nav-icon">&#9654;</span> Reports
+    </a>
+    <a href="#conferences" class="nav-link">
+      <span class="nav-icon">&#9733;</span> Conferences
+    </a>
+    <a href="#tools" class="nav-link">
+      <span class="nav-icon">&#9874;</span> Tools Catalog
+    </a>
+  </nav>
+</aside>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<div class="main-content">
+
+  <!-- ======================= HERO ======================= -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Strategy Session Brief</div>
+      <h1>OSS Security Tooling Landscape &mdash; 2025&ndash;2026</h1>
+      <p class="hero-subtitle">May 2025 &rarr; May 2026 &mdash; curated index of open-source tools, frameworks, and approaches surfaced at the major security conferences.</p>
+
+      <div class="stats-bar fade-in">
+        <div class="stat-item">
+          <span class="stat-number blue" data-target="60" data-suffix="+">0</span>
+          <span class="stat-label">Tools</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number amber" data-target="12">0</span>
+          <span class="stat-label">Conferences</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number green" data-target="9">0</span>
+          <span class="stat-label">Themes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number red" data-target="22">0</span>
+          <span class="stat-label">Reports</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================= DASHBOARD ======================= -->
+  <section id="dashboard" class="section">
+    <div class="section-header fade-in">
+      <h2 class="section-title"><span class="section-icon">&#9632;</span> Dashboard</h2>
+      <p class="section-description">Analytics across the full tool inventory: release cadence, category distribution, offense/defense balance, licensing, vendor concentration, and ecosystem trends.</p>
+    </div>
+
+    <div class="chart-grid stagger-children">
+      <!-- Chart 1: Releases by quarter -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Releases by Quarter</h3>
+        <p class="chart-card-desc">New tool releases and major version bumps per quarter, May 2025 through May 2026.</p>
+        <canvas id="chart-releases"></canvas>
+      </div>
+
+      <!-- Chart 2: Tool count by category -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Tool Count by Category</h3>
+        <p class="chart-card-desc">Distribution of cataloged tools across security domains.</p>
+        <canvas id="chart-categories"></canvas>
+      </div>
+
+      <!-- Chart 3: Offense/Defense balance -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Offense / Defense Balance</h3>
+        <p class="chart-card-desc">Stacked breakdown of offensive, defensive, and dual-use tools per category.</p>
+        <canvas id="chart-offense-defense"></canvas>
+      </div>
+
+      <!-- Chart 4: License distribution -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">License Distribution</h3>
+        <p class="chart-card-desc">OSS license families across the full tool catalog.</p>
+        <canvas id="chart-licenses"></canvas>
+      </div>
+
+      <!-- Chart 5: Top vendor concentration -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Top Vendor Concentration</h3>
+        <p class="chart-card-desc">Number of tools by primary vendor or maintainer organization.</p>
+        <canvas id="chart-vendors"></canvas>
+      </div>
+
+      <!-- Chart 6: MCP adoption timeline -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">MCP Adoption Timeline</h3>
+        <p class="chart-card-desc">Growth of Model Context Protocol server support in security tools.</p>
+        <canvas id="chart-mcp"></canvas>
+      </div>
+
+      <!-- Chart 7: Conference tool density -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Conference Tool Density</h3>
+        <p class="chart-card-desc">Number of tools released or demoed at each conference.</p>
+        <canvas id="chart-conference-heatmap"></canvas>
+      </div>
+
+      <!-- Chart 8: Language distribution -->
+      <div class="chart-card">
+        <h3 class="chart-card-title">Implementation Language</h3>
+        <p class="chart-card-desc">Primary programming language of each tool's codebase.</p>
+        <canvas id="chart-language"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= THEMES ======================= -->
+  <section id="themes" class="section">
+    <div class="section-header fade-in">
+      <h2 class="section-title"><span class="section-icon">&#9670;</span> Big-Picture Themes</h2>
+      <p class="section-description">Nine macro-level themes that defined the OSS security tooling landscape over the past 12 months.</p>
+    </div>
+
+    <div class="card-grid card-grid--2 stagger-children">
+      <!-- Theme 1 -->
+      <div class="theme-card">
+        <div class="theme-number t1">1</div>
+        <div class="theme-body">
+          <h3 class="theme-title">AI-assisted vulnerability discovery moved from demo to delivery</h3>
+          <p class="theme-desc">DARPA's AIxCC finals at DEF CON 33 awarded $8.5M. The seven finalist Cyber Reasoning Systems were all released under OSI-approved licenses &mdash; the first end-to-end open-source vuln-discovery-and-patching systems usable from a developer laptop. 18 real bugs were disclosed during finals.</p>
+          <div class="tags">
+            <span class="tag">AIxCC</span>
+            <span class="tag">Buttercup</span>
+            <span class="tag">Team Atlanta</span>
+            <span class="tag">Seclab Taskflow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 2 -->
+      <div class="theme-card">
+        <div class="theme-number t2">2</div>
+        <div class="theme-body">
+          <h3 class="theme-title">The &ldquo;agentic security&rdquo; wave hit both red and blue</h3>
+          <p class="theme-desc">Promptfoo, GARAK (NVIDIA), PyRIT (Microsoft), and DeepTeam crystallized as the de-facto stack for LLM red-teaming. Tooling for agent abuse &mdash; Bedrock Agent takeover, Copilot prompt injection, MCP-server interception &mdash; was the most-discussed novel attack class.</p>
+          <div class="tags">
+            <span class="tag--purple tag">Promptfoo</span>
+            <span class="tag--purple tag">GARAK</span>
+            <span class="tag--purple tag">PyRIT</span>
+            <span class="tag--purple tag">DeepTeam</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 3 -->
+      <div class="theme-card">
+        <div class="theme-number t3">3</div>
+        <div class="theme-body">
+          <h3 class="theme-title">Kubernetes security split into two layers</h3>
+          <p class="theme-desc">Detection converged around CNCF projects (Falco, Tetragon, Tracee), while configuration/posture fragmented across CEL-based scanners (Spotter), entitlement analyzers (KIEMPossible), and admission engines (Kyverno, Kubewarden).</p>
+          <div class="tags">
+            <span class="tag--green tag">Falco</span>
+            <span class="tag--green tag">Tetragon</span>
+            <span class="tag--green tag">Spotter</span>
+            <span class="tag--green tag">Kyverno</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 4 -->
+      <div class="theme-card">
+        <div class="theme-number t4">4</div>
+        <div class="theme-body">
+          <h3 class="theme-title">Supply chain went baseline</h3>
+          <p class="theme-desc">SLSA 1.1, GUAC 0.12, Sigstore, OWASP CycloneDX 2.0 preview, and the new Sunshine SBOM visualizer reset expectations: SBOM + signed provenance is no longer &ldquo;leading-edge&rdquo;, it is the floor.</p>
+          <div class="tags">
+            <span class="tag--amber tag">SLSA 1.1</span>
+            <span class="tag--amber tag">GUAC</span>
+            <span class="tag--amber tag">Sigstore</span>
+            <span class="tag--amber tag">CycloneDX 2.0</span>
+            <span class="tag--amber tag">Sunshine</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 5 -->
+      <div class="theme-card">
+        <div class="theme-number t5">5</div>
+        <div class="theme-body">
+          <h3 class="theme-title">C2 frameworks consolidated; evasion specialized</h3>
+          <p class="theme-desc">Empire 6.0 (Go agents, marketplace), C4 (WASM cross-OS plugins), Beaconator, BOAZ (multi-layer EDR evasion) &mdash; the offensive tooling market has matured into composable, language-agnostic stacks.</p>
+          <div class="tags">
+            <span class="tag--red tag">Empire 6.0</span>
+            <span class="tag--red tag">C4</span>
+            <span class="tag--red tag">BOAZ</span>
+            <span class="tag--red tag">Beaconator</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 6 -->
+      <div class="theme-card">
+        <div class="theme-number t6">6</div>
+        <div class="theme-body">
+          <h3 class="theme-title">Hardware/firmware attacks dominated academic cons</h3>
+          <p class="theme-desc">ReVault (Dell ControlVault3 on 100+ models, Hexacon), EntrySign (custom x86 microcode, OffensiveCon), Cypherock X1 buffer overflow, NVIDIA CUDA driver 0-days, Apple SEP teardown &mdash; all from exploitation-focused conferences.</p>
+          <div class="tags">
+            <span class="tag">ReVault</span>
+            <span class="tag">EntrySign</span>
+            <span class="tag">Cypherock X1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 7 -->
+      <div class="theme-card">
+        <div class="theme-number t7">7</div>
+        <div class="theme-body">
+          <h3 class="theme-title">CI/CD pipeline compromise became tier-1 risk after TeamPCP</h3>
+          <p class="theme-desc">A single actor chained GitHub Actions workflow injection to ship malicious updates through Trivy, LiteLLM, KICS, Telnyx, and dozens of npm packages. The OSS response shipped within three months: SmokedMeat, Plumber, Brutus.</p>
+          <div class="tags">
+            <span class="tag--red tag">SmokedMeat</span>
+            <span class="tag--red tag">Plumber</span>
+            <span class="tag--red tag">Brutus</span>
+            <span class="tag--red tag">Whooli</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 8 -->
+      <div class="theme-card">
+        <div class="theme-number t8">8</div>
+        <div class="theme-body">
+          <h3 class="theme-title">OSS forensics removed the external dependency requirement</h3>
+          <p class="theme-desc">CERT UEFI Parser (CMU/SEI, NDA-free UEFI/installer/PE parsing) and mquire (Trail of Bits, Linux memory forensics without external debug symbols via kernel-embedded BTF + Kallsyms) both ship in 2026.</p>
+          <div class="tags">
+            <span class="tag">CERT UEFI Parser</span>
+            <span class="tag">mquire</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 9 -->
+      <div class="theme-card">
+        <div class="theme-number t9">9</div>
+        <div class="theme-body">
+          <h3 class="theme-title">OSS defensive ops caught up with offensive</h3>
+          <p class="theme-desc">Little Snitch for Linux closes the per-host firewall gap. Allama closes the OSS SOAR gap. Betterleaks closes the entropy-based-FP gap in secret scanning. cloud-audit closes the &ldquo;PMapper is dead&rdquo; gap.</p>
+          <div class="tags">
+            <span class="tag--green tag">Little Snitch for Linux</span>
+            <span class="tag--green tag">Allama</span>
+            <span class="tag--green tag">Betterleaks</span>
+            <span class="tag--green tag">cloud-audit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= REPORTS ======================= -->
+  <section id="reports" class="section">
+    <div class="section-header fade-in">
+      <h2 class="section-title"><span class="section-icon">&#9654;</span> Reports</h2>
+      <p class="section-description">Per-class comparison reports exploring the tools mirrored as git submodules. Each report identifies what is actually novel in each tool and compares tools within the same class.</p>
+    </div>
+
+    <div class="card-grid card-grid--3 stagger-children">
+
+      <article class="report-card">
+        <div class="report-card-id">ai-vuln-research</div>
+        <h3 class="report-card-title">AI-Driven Vulnerability Discovery</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Buttercup</span>
+          <span class="tag">Seclab Taskflow Agent</span>
+        </div>
+        <a href="report.html?id=ai-vuln-research" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">api-security</div>
+        <h3 class="report-card-title">API Security</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Vespasian</span>
+          <span class="tag">Hadrian</span>
+        </div>
+        <a href="report.html?id=api-security" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">c2-frameworks</div>
+        <h3 class="report-card-title">C2 / Red-Team Frameworks</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--red tag">Sliver</span>
+          <span class="tag--red tag">Mythic</span>
+          <span class="tag--red tag">Empire 6.0</span>
+          <span class="tag--red tag">Havoc</span>
+          <span class="tag--red tag">C4</span>
+        </div>
+        <a href="report.html?id=c2-frameworks" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">ci-cd-security</div>
+        <h3 class="report-card-title">CI/CD Pipeline Security</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--red tag">SmokedMeat</span>
+          <span class="tag--green tag">Plumber</span>
+          <span class="tag--red tag">Brutus</span>
+        </div>
+        <a href="report.html?id=ci-cd-security" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">cloud-posture</div>
+        <h3 class="report-card-title">Cloud Posture</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">cloud-audit</span>
+          <span class="tag">Prowler</span>
+        </div>
+        <a href="report.html?id=cloud-posture" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">kubernetes-security</div>
+        <h3 class="report-card-title">Kubernetes Security</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--green tag">Falco</span>
+          <span class="tag--green tag">Tetragon</span>
+          <span class="tag--green tag">Spotter</span>
+          <span class="tag--green tag">Kyverno</span>
+        </div>
+        <a href="report.html?id=kubernetes-security" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">ebpf-runtime-detection</div>
+        <h3 class="report-card-title">eBPF Runtime Detection</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Falco</span>
+          <span class="tag">Tetragon</span>
+          <span class="tag">Tracee</span>
+        </div>
+        <a href="report.html?id=ebpf-runtime-detection" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">identity-attack-path</div>
+        <h3 class="report-card-title">Identity / AD Attack Path</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">BloodHound</span>
+          <span class="tag">SAMLSmith</span>
+          <span class="tag">ForceHound</span>
+        </div>
+        <a href="report.html?id=identity-attack-path" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">llm-redteam</div>
+        <h3 class="report-card-title">LLM Red-Team &amp; Agent Abuse</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--purple tag">Promptfoo</span>
+          <span class="tag--purple tag">GARAK</span>
+          <span class="tag--purple tag">PyRIT</span>
+          <span class="tag--purple tag">DeepTeam</span>
+        </div>
+        <a href="report.html?id=llm-redteam" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">fuzzing</div>
+        <h3 class="report-card-title">Fuzzing Engines</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--amber tag">AFL++</span>
+          <span class="tag--amber tag">LibAFL</span>
+          <span class="tag--amber tag">Ruzzy</span>
+        </div>
+        <a href="report.html?id=fuzzing" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">fuzzing-research</div>
+        <h3 class="report-card-title">Fuzzing Research Frontier</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--amber tag">IDFuzz</span>
+          <span class="tag--amber tag">G2FUZZ</span>
+          <span class="tag--amber tag">Lyso</span>
+          <span class="tag--amber tag">DUMPLING</span>
+        </div>
+        <a href="report.html?id=fuzzing-research-2025-2026" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">teampcp-postmortem</div>
+        <h3 class="report-card-title">TeamPCP Post-Mortem</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--red tag">Attack chain</span>
+          <span class="tag--red tag">Detection gaps</span>
+          <span class="tag--red tag">Response</span>
+        </div>
+        <a href="report.html?id=teampcp-postmortem" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">defensive-ops</div>
+        <h3 class="report-card-title">Defensive Ops</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--green tag">Little Snitch for Linux</span>
+          <span class="tag--green tag">Allama</span>
+        </div>
+        <a href="report.html?id=defensive-ops" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">firmware-memory-forensics</div>
+        <h3 class="report-card-title">Firmware &amp; Memory Forensics</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">CERT UEFI Parser</span>
+          <span class="tag">mquire</span>
+        </div>
+        <a href="report.html?id=firmware-memory-forensics" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">scanners</div>
+        <h3 class="report-card-title">Vulnerability Scanners</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Trivy</span>
+          <span class="tag">Nettacker</span>
+          <span class="tag">PatchLeaks</span>
+        </div>
+        <a href="report.html?id=scanners" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">secret-scanning</div>
+        <h3 class="report-card-title">Secret Scanning</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Betterleaks</span>
+          <span class="tag">Gitleaks</span>
+        </div>
+        <a href="report.html?id=secret-scanning" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">waf</div>
+        <h3 class="report-card-title">Web Application Firewalls</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Coraza</span>
+          <span class="tag">Core Rule Set</span>
+        </div>
+        <a href="report.html?id=waf" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">vulnmgmt-sbom</div>
+        <h3 class="report-card-title">Vuln Management &amp; SBOM</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">DefectDojo</span>
+          <span class="tag">Sunshine</span>
+        </div>
+        <a href="report.html?id=vulnmgmt-sbom" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">perimeter-stack</div>
+        <h3 class="report-card-title">Perimeter Stack</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">Nuclei</span>
+          <span class="tag">httpx</span>
+          <span class="tag">Katana</span>
+          <span class="tag">Caido</span>
+        </div>
+        <a href="report.html?id=perimeter-stack" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">landscape-analysis</div>
+        <h3 class="report-card-title">Cross-Cutting Landscape Analysis</h3>
+        <div class="report-card-tools tags">
+          <span class="tag--amber tag">All tools aggregated</span>
+        </div>
+        <a href="report.html?id=landscape-analysis" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+      <article class="report-card">
+        <div class="report-card-id">reference-design</div>
+        <h3 class="report-card-title">Reference Designs</h3>
+        <div class="report-card-tools tags">
+          <span class="tag">SafeUpdater</span>
+          <span class="tag">DVBE</span>
+        </div>
+        <a href="report.html?id=reference-design" class="report-card-link">View Report &rarr;</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ======================= CONFERENCES ======================= -->
+  <section id="conferences" class="section">
+    <div class="section-header fade-in">
+      <h2 class="section-title"><span class="section-icon">&#9733;</span> Conference Timeline</h2>
+      <p class="section-description">Thirteen conferences spanning May 2025 to May 2026. Past events are marked with filled dots; upcoming events with open dots.</p>
+    </div>
+
+    <div class="timeline fade-in">
+
+      <div class="timeline-item past">
+        <div class="timeline-date">May 26&ndash;30, 2025</div>
+        <div class="timeline-conf-name">OWASP AppSec EU 2025</div>
+        <div class="timeline-city">Barcelona &mdash; OWASP project showcase + Open WAF day</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Jun 2025</div>
+        <div class="timeline-conf-name">fwd:cloudsec NA 2025</div>
+        <div class="timeline-city">Cloud-attack-and-defense; community OSS focus</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Jun 23&ndash;27, 2025</div>
+        <div class="timeline-conf-name">Troopers 25</div>
+        <div class="timeline-city">Heidelberg &mdash; AD / Entra ID security track</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Aug 2&ndash;7, 2025</div>
+        <div class="timeline-conf-name">Black Hat USA 2025</div>
+        <div class="timeline-city">Las Vegas &mdash; 100+ Briefings, 115+ Arsenal demos, AI agent vuln chains</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Aug 7&ndash;10, 2025</div>
+        <div class="timeline-conf-name">DEF CON 33</div>
+        <div class="timeline-city">Las Vegas &mdash; Largest tool-release surface; AIxCC finals; ~40 Demo Labs tools</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Aug 13&ndash;15, 2025</div>
+        <div class="timeline-conf-name">USENIX Security '25</div>
+        <div class="timeline-city">Seattle &mdash; Fuzzing papers with released code</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Oct 6&ndash;12, 2025</div>
+        <div class="timeline-conf-name">Hexacon 2025</div>
+        <div class="timeline-city">Paris &mdash; 15-talk single-track exploit conference; Pwn2Own follow-ups</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Nov 3&ndash;7, 2025</div>
+        <div class="timeline-conf-name">OWASP AppSec USA 2025</div>
+        <div class="timeline-city">Washington DC &mdash; SAMM, DefectDojo, Nettacker, CRS next-gen</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Nov 10&ndash;13, 2025</div>
+        <div class="timeline-conf-name">KubeCon NA 2025</div>
+        <div class="timeline-city">Atlanta &mdash; OSS SecurityCon; Kyverno / Kubewarden / Copacetic</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Dec 8&ndash;11, 2025</div>
+        <div class="timeline-conf-name">Black Hat Europe 2025</div>
+        <div class="timeline-city">London &mdash; 55 Arsenal demos + 6 labs</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Feb 23&ndash;27, 2026</div>
+        <div class="timeline-conf-name">NDSS 2026</div>
+        <div class="timeline-city">San Diego &mdash; FUZZING'26 workshop</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">Mar 23&ndash;26, 2026</div>
+        <div class="timeline-conf-name">RSA 2026</div>
+        <div class="timeline-city">San Francisco &mdash; Agentic AI + AI agents centerpiece</div>
+      </div>
+
+      <div class="timeline-item past">
+        <div class="timeline-date">May 15&ndash;16, 2026</div>
+        <div class="timeline-conf-name">OffensiveCon 2026</div>
+        <div class="timeline-city">Berlin &mdash; Exploit research, no OSS culture</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================= TOOLS CATALOG ======================= -->
+  <section id="tools" class="section">
+    <div class="section-header fade-in">
+      <h2 class="section-title"><span class="section-icon">&#9874;</span> Tools Catalog</h2>
+      <p class="section-description">Searchable catalog of all tracked tools. <span class="standout" style="color:#f39c12">&#9733;</span> marks standout picks. Showing <strong id="tools-count">0</strong> tools.</p>
+    </div>
+
+    <div class="tools-controls fade-in">
+      <div class="search-wrapper">
+        <input type="text" id="tools-search" class="search-input" placeholder="Search tools, categories, vendors...">
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="offense">Offense</button>
+        <button class="filter-btn" data-filter="defense">Defense</button>
+        <button class="filter-btn" data-filter="dual">Dual</button>
+        <button class="filter-btn" data-filter="standout">Standout</button>
+      </div>
+    </div>
+
+    <div class="table-container fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Side</th>
+            <th>Year</th>
+            <th>License</th>
+            <th>Vendor</th>
+          </tr>
+        </thead>
+        <tbody id="tools-tbody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="site-footer">
+    <div class="footer-title">Strategy Session Brief &mdash; compiled May 2026</div>
+    <p class="footer-text">Data sourced from 12 conferences, 27+ research blogs, 40+ git submodules</p>
+    <a href="https://github.com/grauwolf32/stratsession" class="footer-link">View on GitHub &rarr;</a>
+  </footer>
+
+</div><!-- /.main-content -->
+
+<!-- Chart.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<!-- App JS -->
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -13,6 +13,12 @@ In-depth exploration of the submodules under [`../sources/`](../sources/), focus
 | [reference-design.md](./reference-design.md) | Reference designs & training labs | SafeUpdater (Electron), DVBE (Damn Vulnerable Browser Extension) |
 | [ci-cd-security.md](./ci-cd-security.md) | CI/CD pipeline security (offensive + defensive + credential validation) | SmokedMeat, Plumber, Brutus |
 | [cloud-posture.md](./cloud-posture.md) | AWS posture + attack-chain correlation | cloud-audit (vs Prowler) |
+| [kubernetes-security.md](./kubernetes-security.md) | Kubernetes / container security (detection + posture + admission) | Falco + StratoShark, Tetragon, Tracee, Spotter, Kyverno, Kubewarden, Copacetic, KIEMPossible |
+| [ebpf-runtime-detection.md](./ebpf-runtime-detection.md) | eBPF runtime detection deep-dive (Falco vs Tetragon vs Tracee) | Kernel hooks, policy authoring, enforcement models, production deployment, StratoShark forensics |
+| [identity-attack-path.md](./identity-attack-path.md) | Identity / AD / Entra ID attack-path tooling | BloodHound CE, AzureHound, MSSQLHound, EntraGoat, SAMLSmith, OAuthSeeker, maSSO, ForceHound |
+| [llm-redteam.md](./llm-redteam.md) | LLM red-team & agent-abuse landscape | Promptfoo, GARAK, PyRIT, DeepTeam, promptmap2, MPIT, Harbinger, mcp-snitch, Sketchy |
+| [fuzzing-research-2025-2026.md](./fuzzing-research-2025-2026.md) | Academic fuzzing frontier (USENIX '25 + NDSS '26) | IDFuzz, G²FUZZ, Lyso, DUMPLING, Fuzzilicon, IoTBec + 4 more |
+| [teampcp-postmortem.md](./teampcp-postmortem.md) | TeamPCP incident post-mortem & lessons learned | Attack chain, detection gaps, SmokedMeat/Plumber/Brutus response, forecast |
 | [firmware-memory-forensics.md](./firmware-memory-forensics.md) | UEFI firmware parsing + Linux memory forensics | CERT UEFI Parser, mquire |
 | [defensive-ops.md](./defensive-ops.md) | Host firewall + OSS SOAR | Little Snitch for Linux, Allama |
 | [secret-scanning.md](./secret-scanning.md) | Secret scanning with CEL + BPE naturalness | Betterleaks (vs Gitleaks / TruffleHog) |
